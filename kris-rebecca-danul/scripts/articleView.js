@@ -103,18 +103,24 @@ articleView.setTeasers = function() {
   // Ideally, we'd attach this as just one event handler on the #articles section, and let it process (in other words... delegate) any .read-on clicks that happen within child nodes.
   $('article').on('click', 'a', function (event){
     event.preventDefault();
-    const selected = $(this).parent();
-    const restOfParagraphs = selected.find($('.article-body *:nth-of-type(n+2)'));
+    // const selected = $(this).parent();
+    // const restOfParagraphs = selected.find($('.article-body *:nth-of-type(n+2)'));
 
-    if ($(this).attr('data-show') === 'false') {
-      restOfParagraphs.fadeIn();
-      $(this).html('Show Less &rarr;');
-      $(this).attr('data-show', 'true');
+    // if ($(this).attr('data-show') === 'false') {
+    //   restOfParagraphs.fadeIn();
+    //   $(this).html('Show Less &rarr;');
+    //   $(this).attr('data-show', 'true');
+    // } else {
+    //   restOfParagraphs.hide();
+    //   $(this).html('Read on &rarr;');
+    //   $(this).attr('data-show', 'false');
+
+    if ($(this).text().includes('Read on')) {
+      $(this).parent().find('*').fadeIn();
+      $(this).html('Show Less &larr;');
     } else {
-      restOfParagraphs.hide();
+      $(this).parent().find($('.article-body *:nth-of-type(n+2)')).hide();
       $(this).html('Read on &rarr;');
-      $(this).attr('data-show', 'false');
-
     }
   });
 };
